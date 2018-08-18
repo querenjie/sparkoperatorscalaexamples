@@ -19,6 +19,8 @@ object FilterExample {
     val datasRDD = sc.parallelize(datas)
     val filteredRDD = datasRDD.filter(x => {x >= 3})
     filteredRDD.foreach(println(_))
+
+    sc.stop()
   }
 
   def main(args: Array[String]): Unit = {
