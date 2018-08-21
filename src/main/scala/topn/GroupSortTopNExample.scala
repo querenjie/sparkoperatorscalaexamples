@@ -2,8 +2,6 @@ package topn
 
 import org.apache.spark.{SparkConf, SparkContext}
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
   * 读取文件，分组排序，提取每个分组的前N条数据
   */
