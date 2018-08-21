@@ -3,9 +3,9 @@ package operators.action
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-  * Transformation
+  * Action
   * takeOrdered
-  * 语法（scala）：
+  * 语法（java）：
   * java.util.List<T> takeOrdered(int num)
   *
   * java.util.List<T> takeOrdered(int num,

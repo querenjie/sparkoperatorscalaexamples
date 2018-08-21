@@ -3,9 +3,9 @@ package operators.action
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-  * Transformation
+  * Action
   * takeSample
-  * 语法（scala）：
+  * 语法（java）：
   * static java.util.List<T> takeSample(boolean withReplacement,
   * int num,
   * long seed)
