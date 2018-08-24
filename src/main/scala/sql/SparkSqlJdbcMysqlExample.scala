@@ -31,6 +31,6 @@ object SparkSqlJdbcMysqlExample {
     val sparkContext = new SparkContext(conf)
     SparkSqlJdbcMysqlExample.createInsertData(sparkContext)
     sparkContext.stop()
-    println("aaaaaaaaaaaa")
+    println("去看看mysql中的test.table1表中是否有数据了")
   }
 }
