@@ -44,9 +44,10 @@ import scala.collection.mutable.ArrayBuffer
   */
 object AggregateByKeyExample {
   private def doit(sparkContext: SparkContext): Unit = {
-    val datas = ArrayBuffer((1, 3), (1, 2), (1, 4), (2, 3))
+    val datas = ArrayBuffer((1, 3), (1, 2), (1, 4), (2, 5))
     val datasRDD = sparkContext.parallelize(datas, 2)
-    datasRDD.aggregateByKey(0)(seq, comb).foreach(println)
+    //datasRDD.aggregateByKey(0)(seq, comb).foreach(println)
+    datasRDD.aggregateByKey(0)(seq, comb).collect()
   }
 
   private def seq(a: Int, b: Int): Int = {
