@@ -29,7 +29,7 @@ object MapPartitionsWithIndex {
     datasRDD.mapPartitionsWithIndex((i, iter) => {
       var result = new ArrayBuffer[String]()
       while (iter.hasNext) {
-        result.append("分区索引:" + i + "\t" + iter.next)
+        result.append("分区号:" + i + "\t" + iter.next)
       }
       result.iterator
     }, true).foreach(println)

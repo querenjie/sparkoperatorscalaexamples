@@ -32,7 +32,7 @@ object MapPartitionsExample {
       var count = 0
       var result = ArrayBuffer[String]()
       while (n.hasNext) {
-        result.append("分区索引:" + count + "\t" + n.next)
+        result.append("在分区中的位置索引:" + count + "\t" + n.next)
         count = count + 1
       }
       result.iterator
