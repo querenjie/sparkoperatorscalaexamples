@@ -2,6 +2,7 @@ package operators
 
 import java.io.{FileNotFoundException, IOException}
 
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -17,7 +18,8 @@ import org.apache.spark.{SparkConf, SparkContext}
 object ReduceByKeyExample {
   private def doit(sparkContext: SparkContext): Unit = {
     try {
-      val text = sparkContext.textFile("hdfs://192.168.1.20:9000/test/wordcount/in/inputFile1.txt")
+//      val text = sparkContext.textFile("hdfs://appcluster/test/wordcount/in/inputFile1.txt", 10000)
+      val text = sparkContext.textFile("hdfs://192.168.1.20:8020/test/wordcount/in/inputFile1.txt")
       text.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_ + _).foreach(println)
     } catch {
       case ex: FileNotFoundException => {
@@ -33,8 +35,14 @@ object ReduceByKeyExample {
   }
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local").setAppName(ReduceByKeyExample.getClass.getSimpleName)
-    val sc = new SparkContext(conf)
+    //在本地运行直接访问hdfs
+    val spark = SparkSession.builder().appName(ReduceByKeyExample.getClass.getSimpleName).master("local[*]").getOrCreate()
+    //自动提交到集群上运行，但会有问题，so we do not recommend to use it in IDE.
+//    val spark = SparkSession.builder().appName(ReduceByKeyExample.getClass.getSimpleName).master("spark://192.168.1.20:7077").getOrCreate()
+
+    val sc = spark.sparkContext
+//    val conf = new SparkConf().setMaster("spark://192.168.1.20:7077").setAppName(ReduceByKeyExample.getClass.getSimpleName)
+//    val sc = new SparkContext(conf)
     ReduceByKeyExample.doit(sc)
     sc.stop()
   }
