@@ -19,7 +19,7 @@ object UnionExample {
     val sc = new SparkContext(conf)
 
     val datas1 = ArrayBuffer("张三", "李四")
-    val datas2 = ArrayBuffer("tom", "gim")
+    val datas2 = ArrayBuffer("tom", "gim", "李四")
 
     val datas1RDD = sc.parallelize(datas1)
     val datas2RDD = sc.parallelize(datas2)
