@@ -7,6 +7,23 @@ import org.apache.spark.{SparkConf, SparkContext}
   */
 object GroupSortTopNExample {
   private def doit(sparkContext: SparkContext, topN: Int) {
+    /*
+        group_sort_topn.txt中的内容：
+        hadoop 23
+        spark 45
+        java 90
+        spark 57
+        spark 90
+        hadoop 99
+        hadoop 76
+        spark 45
+        spark 88
+        spark 89
+        hadoop 45
+        hadoop 90
+        java 78
+        java 70
+     */
     val textRDD = sparkContext.textFile("group_sort_topn.txt")
     textRDD.map(line=>(line.split(" ")(1), line.split(" ")(0))).sortByKey(false)
       .map(tuple=>(tuple._2,tuple._1)).groupByKey().map(tuple=>{
